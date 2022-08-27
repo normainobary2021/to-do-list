@@ -1,27 +1,40 @@
-// import _ from 'lodash';
+import {addTxt, loadTheData} from './modules/addDataModule.js';
 import './style.css';
 
-const myArray = [
-  {
-    id: 0,
-    description: 'Write a To-Do list function',
-  },
-  {
-    id: 1,
-    description: 'Push changes and submit for Review',
-  },
-  {
-    id: 2,
-    description: 'Get project reviewed and approves',
-  },
-  {
-    id: 3,
-    description: 'Merge branch to main',
-  },
-];
+const saveBtn = document.getElementById('saveBtn');
+const resetBtn = document.getElementById('resetBtn');
+const arrayLst = localStorage.getItem('todo') ? JSON.parse(localStorage.getItem('todo')) : [];
 
-document.querySelector('.generate-to-do').innerHTML = myArray.map((items) => `<div class="full-list">
-  <div class="to-do">
-  <input type="checkbox" id="chkBx">
-  <p class="item-description" id="card1">${items.description}</p> 
-  </div>`).join('');
+let iD = 1;
+saveBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (addTxt.value !== '') {
+    const tskObj = {
+      description: `${addTxt.value}`,
+      completed: false,
+      index: iD,
+    };
+    arrayLst.push(tskObj);
+
+    const localTasks = localStorage.getItem('todo') ? JSON.parse(localStorage.getItem('todo')) : [];
+    localTasks.push(tskObj);
+
+    for (let j=0; j < localTasks.length; j += 1) {
+      localTasks[j].index = j + 1;
+    }
+    localStorage.setItem('todo', JSON.stringify(localTasks));
+  }
+  iD += 1;
+  loadTheData();
+});
+
+resetBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const mutedItem = arrayLst.filter((m) => m.completed === false);
+
+  for (let x = 0; x < mutedItem.length; x += 1) {
+    mutedItem[x].index = x + 1;
+  }
+  localStorage.setItem('todo', JSON.stringify(mutedItem));
+  loadTheData();
+});
