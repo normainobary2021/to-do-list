@@ -1,4 +1,4 @@
-import {addTxt, loadTheData} from './modules/addDataModule.js';
+import { addTxt, loadTheData } from './modules/addDataModule.js';
 import './style.css';
 
 const saveBtn = document.getElementById('saveBtn');
@@ -19,7 +19,7 @@ saveBtn.addEventListener('click', (e) => {
     const localTasks = localStorage.getItem('todo') ? JSON.parse(localStorage.getItem('todo')) : [];
     localTasks.push(tskObj);
 
-    for (let j=0; j < localTasks.length; j += 1) {
+    for (let j = 0; j < localTasks.length; j += 1) {
       localTasks[j].index = j + 1;
     }
     localStorage.setItem('todo', JSON.stringify(localTasks));

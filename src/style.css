@@ -40,7 +40,6 @@ body {
 .editBn {
   height: 37px;
   width: 45px;
-  /* font-size: 20px; */
   font-weight: bold;
   text-align: center;
   cursor: move;
