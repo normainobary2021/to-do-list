@@ -15,7 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {},
+  "bugs": {
+    "url": "https://github.com/normainobary2021/to-do-list/issues"
+  },
   "homepage": "https://github.com/normainobary2021/to-do-list#readme",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
